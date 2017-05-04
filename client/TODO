@@ -1,0 +1,13 @@
+1) create ant file to build a jar-file that can be exported into other applications
+
+2) add reporting of pressure and torque from the cpn model. 
+  Could be done by server push or via a request/response from the client in 
+  combination with a poll transition and use of canreceive in the server side
+
+3) extend the example client-server session such that 
+    - a session can be terminated (but connection remains for a new session?)
+    - the client can close the connection, but the server remains running
+    - the client can terminate the server by terminate session + close connection 
+    
+ 4) generalise the client side session implementation such that it is possible to
+   have the server be running on a different machine and not only localhost
