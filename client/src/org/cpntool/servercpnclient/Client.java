@@ -11,16 +11,10 @@ public class Client  {
     	Session session = new Session();    	
     	session.start(Integer.parseInt(args[0]));
     	
-    	/* setup the configuration to be simulated */
-    	Config config = new Config(2,2);
-    	session.evaluate(config.getConfigStr());
+    	/* start a simulation */
+    	session.evaluate("CPN'Replications.run();\n");
     	
-    	/* run the simulation and get a results */
-    	session.evaluate("CPN'Replications.nreplications 10;\n");
-    	
-    	String str = session.evaluateWait("ConnManagementLayer.send(\"client\",Real.toString (RTT_client_1.avrg ()),stringEncode);\n");
-    	System.out.println("Received result: " + str);
-    	
+    	/* terminate the session with the server */
     	session.terminate();
     }
 }

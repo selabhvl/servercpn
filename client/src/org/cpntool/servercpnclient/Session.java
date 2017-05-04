@@ -53,6 +53,7 @@ public class Session {
 		String received;
 
 		try {
+			System.out.print("Sending  : " + str);
 			server.send(EncodeDecode.encode(str));
 			received = EncodeDecode.decodeString(server.receive());
 			System.out.println("Received : " + received);
