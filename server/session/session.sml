@@ -69,7 +69,7 @@ struct
 
         handle exn => 
                 ((* --- terminate the server --- *)
-               	 Log.writelog ("Exception raised: "^(exnName exn)^" .\n");
+               	 Log.writelog ("Exception processing request: "^(exnName exn)^" .\n");
                  Log.writelog ("CPN server terminating.\n"); 
                  ConnManagementLayer.closeConnection (client())))
 

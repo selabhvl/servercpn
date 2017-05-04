@@ -14,6 +14,11 @@ public class Client  {
     	/* start a simulation */
     	session.evaluate("CPN'Replications.run();\n");
     	
+    	/* receive number of steps from the server */
+    	String steps = session.evaluateWait("Session.send (IntInf.toString (step()));\n");
+
+    	System.out.println("Steps : " + steps);
+    	
     	/* terminate the session with the server */
     	session.terminate();
     }
