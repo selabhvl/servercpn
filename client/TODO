@@ -11,3 +11,7 @@
     
  4) generalise the client side session implementation such that it is possible to
    have the server be running on a different machine and not only localhost
+   
+ 5) add  JavaDoc to the Comms/CPN and session layer
+ 
+ 6) add the Comms/CPN SML side to the repository on the client side
