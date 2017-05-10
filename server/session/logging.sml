@@ -8,7 +8,7 @@
 
    --- *)
 
-structure Log : LOG = 
+structure Log (* : LOG *) = 
 struct
 
      val logfile_default = ref "/tmp/CPNServer.log"

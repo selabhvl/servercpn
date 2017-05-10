@@ -8,7 +8,7 @@
 
    --- *)
 
-structure Session : SESSION = 
+structure Session (* : SESSION *) = 
 struct
     
     val defaultport = 5000;
