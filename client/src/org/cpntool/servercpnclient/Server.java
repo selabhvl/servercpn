@@ -2,6 +2,15 @@ package org.cpntool.servercpnclient;
 
 public class Server {
 
+	final static String START_SIMULATION_CMD = "STARTSIMULATION();\n";
+	final static String RESET_SIMULATION_CMD = "RESETSIMULATION();\n";
+	
+	final static String GET_PRESSURE_MSG = "GETPRESSURE()\n";
+	final static String GET_TORQUE_MSG = "GETTORQUE();\n";
+	
+	final static String STOP_SIMULATION_MSG = "STOP_SIMULATION();\n";
+	final static String STOP_SIMULATION_RESP = "STOPPED_SIMULATION";
+	
 	private int port;
 	private String host;
 	Session session;
@@ -29,25 +38,36 @@ public class Server {
 	}
 
 	public void startSimulation() {
-		
+		session.evaluate(START_SIMULATION_CMD);
 	}
 
-	public void stopSimulation() {
-
+	public String stopSimulation() {
+		return session.evaluateWait(STOP_SIMULATION_MSG);
 	}
 
 	public void resetSimulation() {
-
+		session.evaluate(RESET_SIMULATION_CMD);
 	}
 
-	// get pressure
-	public void getPressure() {
-
+	// get a value pressure  - -1 is the simulation is stopped
+	private int getValue(String value) {
+		String response = session.evaluateWait(value);
+		
+		if (response.equals(STOP_SIMULATION_RESP)) {
+			return -1;
+		} else 
+		{
+			return Integer.parseInt(response);
+		}
 	}
-
-	// get torque
-	public void getTorque() {
-
+	
+	public int getPressure() {
+		return getValue(GET_PRESSURE_MSG);
+	}
+	
+	// get torque -1 is simulation stopped
+	public int getTorque() {
+		return getValue(GET_TORQUE_MSG);
 	}
 
 }
