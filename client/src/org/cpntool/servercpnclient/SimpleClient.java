@@ -3,7 +3,7 @@ package org.cpntool.servercpnclient;
 public class SimpleClient {
 
 	public static void main(String[] args) {
-		MockServer server = new MockServer(Integer.parseInt(args[0]),"localhost");
+		Server server = new Server(Integer.parseInt(args[0]),"localhost");
 		
 		if (server.connect()) {
 			

@@ -57,6 +57,7 @@ public class Session {
 		try {
 			System.out.print("Sending  : " + str);
 			server.send(EncodeDecode.encode(str));
+			System.out.println("Waiting");
 			received = EncodeDecode.decodeString(server.receive());
 			System.out.println("Received : " + received);
 		} catch (SocketException e) {
@@ -71,12 +72,19 @@ public class Session {
 		String received = null;
 	
 		try {
+			System.out.print("Sending  : " + str);
 			server.send(EncodeDecode.encode(str));
+			
 			// read the internal ok from the server
+			System.out.println("Awaiting OK");
 			received = EncodeDecode.decodeString(server.receive());
 			System.out.println("Received : " + received);
+			
 			// read the results expected to be sent back from the server
+			System.out.println("Awaiting Reply");
 			received = EncodeDecode.decodeString(server.receive());
+			System.out.println("Received : " + received);
+			
 		} catch (SocketException e) {
 
 			System.err.println("evaluatewait - Socket Exception");
