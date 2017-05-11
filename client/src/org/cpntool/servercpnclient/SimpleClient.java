@@ -3,9 +3,10 @@ package org.cpntool.servercpnclient;
 public class SimpleClient {
 
 	public static void main(String[] args) {
-		Server server = new Server(Integer.parseInt(args[0]),"localhost");
+		MockServer server = new MockServer(Integer.parseInt(args[0]),"localhost");
 		
 		if (server.connect()) {
+			
 			server.startSimulation();
 			
 			int i = 0;
@@ -14,9 +15,9 @@ public class SimpleClient {
 			while ((!stopped) && (i<5)) {
 			
 				int pressure = server.getPressure();
-				int torque = server.getTorque();
-				
 				System.out.println("Pressure : " + pressure);
+				
+				int torque = server.getTorque();
 				System.out.println("Torque : " + pressure);
 				
 				if (pressure < 0 || torque <0) {

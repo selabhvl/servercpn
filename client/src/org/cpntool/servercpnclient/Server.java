@@ -1,6 +1,6 @@
 package org.cpntool.servercpnclient;
 
-public class Server {
+public class Server implements ICPNServer {
 
 	final static String START_SIMULATION_CMD = "STARTSIMULATION();\n";
 	final static String RESET_SIMULATION_CMD = "RESETSIMULATION();\n";
