@@ -21,13 +21,25 @@ fun checkenv (p,t) =
       (let
 	  val msg = Session.receive()
 	  val _ = Log.writelog("Environment: "^msg);
+	  val _ = Session.send ("OK");
+	  val _ = (if (msg = "GETPRESSURE();\n")
+		   then Log.writelog "MATCH\n"
+		   else ());
       in
 	  case msg of
-	      "STOP_SIMULATION();\n" => false
-	   |  "GETPRESSURE();\n" => (Session.send (Int.toString p);
-				true)
-	   |  "GETTORQUE();\n" => (Session.send (Int.toString t);
-				 true)
-	   |  _ => raise checkEnvExn msg
+	      "STOP_SIMULATION();\n" =>
+	      (Log.writelog("Handling getPressure");
+	       false)
+	   |  "GETPRESSURE();\n" =>
+	      (Log.writelog("Handling getPressure");
+	       Session.send (Int.toString p);
+	       true)
+	   |  "GETTORQUE();\n" =>
+	      (Log.writelog("Handling getTorque");
+	       Session.send (Int.toString t);
+	       true)
+	   |  _ =>
+	      (Log.writelog("checkEnvExn\n");
+	       raise checkEnvExn msg)
       end)
   else true (* continue simulation *) 
