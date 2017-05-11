@@ -24,11 +24,11 @@
       </ml>
       <use id="ID1526333029">
         <ml>(buildpath^&quot;session/logging.sml&quot;)</ml>
-        <layout>use  (buildpath^&quot;session/logging.sml&quot;);</layout>
+        <layout>use (buildpath^&quot;session/logging.sml&quot;);</layout>
       </use>
       <use id="ID1526337172">
         <ml>(buildpath^&quot;session/session.sml&quot;)</ml>
-        <layout>use  (buildpath^&quot;session/session.sml&quot;);</layout>
+        <layout>use (buildpath^&quot;session/session.sml&quot;);</layout>
       </use>
       <use id="ID1526341555">
         <ml>(buildpath^&quot;../model/environment.sml&quot;)</ml>
@@ -551,7 +551,7 @@ checkenv(p,t)</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1527500020">
+        <annot id="ID1527500650">
           <posattr x="-91.000000"
                    y="31.000000"/>
           <fillattr colour="White"
@@ -583,7 +583,7 @@ checkenv(p,t)</text>
                    currentcyckle="2"/>
         <transend idref="ID1455805656"/>
         <placeend idref="ID1526315760"/>
-        <annot id="ID1527500021">
+        <annot id="ID1527500651">
           <posattr x="60.000000"
                    y="-25.000000"/>
           <fillattr colour="White"
@@ -615,7 +615,7 @@ checkenv(p,t)</text>
                    currentcyckle="2"/>
         <transend idref="ID1526315936"/>
         <placeend idref="ID1526315760"/>
-        <annot id="ID1527500022">
+        <annot id="ID1527500652">
           <posattr x="60.000000"
                    y="-120.000000"/>
           <fillattr colour="White"
@@ -660,7 +660,7 @@ checkenv(p,t)</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1527500023">
+        <annot id="ID1527500653">
           <posattr x="-89.000000"
                    y="-157.000000"/>
           <fillattr colour="White"
@@ -940,9 +940,9 @@ else 0</text>
                    currentcyckle="2"/>
         <transend idref="ID1526318483"/>
         <placeend idref="ID1455805631"/>
-        <annot id="ID1526337995">
-          <posattr x="-241.000000"
-                   y="9.000000"/>
+        <annot id="ID1527501205">
+          <posattr x="-249.000000"
+                   y="-31.000000"/>
           <fillattr colour="White"
                     pattern="Solid"
                     filled="false"/>
@@ -952,9 +952,7 @@ else 0</text>
           <textattr colour="Black"
                     bold="false"/>
           <text tool="CPN Tools"
-                version="4.0.1">if continue
-then 1`()
-else empty</text>
+                version="4.0.1">1`()</text>
         </annot>
       </arc>
       <arc id="ID1526338175"
@@ -987,7 +985,7 @@ else empty</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1527500024">
+        <annot id="ID1527500654">
           <posattr x="-267.000000"
                    y="-58.000000"/>
           <fillattr colour="White"
@@ -1078,6 +1076,20 @@ use (buildpath^&quot;build/export-server.sml&quot;);</text>
         <label/>
         <text>use (buildpath^&quot;../model/environment.sml&quot;);</text>
       </Aux>
+      <Aux id="ID1527500602">
+        <posattr x="-284.000000"
+                 y="234.000000"/>
+        <fillattr colour="White"
+                  pattern=""
+                  filled="false"/>
+        <lineattr colour="Black"
+                  thick="1"
+                  type="Solid"/>
+        <textattr colour="Black"
+                  bold="false"/>
+        <label/>
+        <text>CPN&apos;Replications.run();</text>
+      </Aux>
     </page>
     <instances>
       <instance id="ID2149"
@@ -1111,22 +1123,22 @@ use (buildpath^&quot;build/export-server.sml&quot;);</text>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10002.enable">
-        <value>
-          <boolean>true</boolean>
-        </value>
-      </option>
       <option name="extensions.10006.enable">
         <value>
           <boolean>true</boolean>
         </value>
       </option>
-      <option name="extensions.10001.enable">
+      <option name="extensions.10002.enable">
         <value>
           <boolean>true</boolean>
         </value>
       </option>
       <option name="extensions.10005.enable">
+        <value>
+          <boolean>true</boolean>
+        </value>
+      </option>
+      <option name="extensions.10001.enable">
         <value>
           <boolean>true</boolean>
         </value>
@@ -1332,7 +1344,7 @@ use (buildpath^&quot;build/export-server.sml&quot;);</text>
                  x="482"
                  y="41"
                  width="907"
-                 height="610">
+                 height="586">
         <sheets>
           <cpnsheet id="ID2215"
                     panx="152.000000"
@@ -1359,8 +1371,36 @@ use (buildpath^&quot;build/export-server.sml&quot;);</text>
         </zorder>
       </cpnbinder>
     </binders>
-    <monitorblock name="Monitors"/>
-    <IndexNode expanded="false">
+    <monitorblock name="Monitors">
+      <monitor id="ID1527500482"
+               name="New Monitor"
+               type="1"
+               typedescription="Breakpoint"
+               disabled="false">
+        <node idref="ID1526318483"
+              pageinstanceidref="ID2149"/>
+        <declaration name="Predicate">
+          <ml id="ID1527500529">fun pred (bindelem) = 
+let
+  fun predBindElem (Main&apos;Environment (1, 
+                               {continue,p,t})) = not continue
+      | predBindElem _ = false
+in
+  predBindElem bindelem  
+end
+            <layout>fun pred (bindelem) = 
+let
+  fun predBindElem (Main&apos;Environment (1, 
+                               {continue,p,t})) = not continue
+      | predBindElem _ = false
+in
+  predBindElem bindelem  
+end</layout>
+          </ml>
+        </declaration>
+      </monitor>
+    </monitorblock>
+    <IndexNode expanded="true">
       <IndexNode expanded="false"/>
       <IndexNode expanded="false"/>
       <IndexNode expanded="true">
@@ -1425,8 +1465,10 @@ use (buildpath^&quot;build/export-server.sml&quot;);</text>
           <IndexNode expanded="false"/>
         </IndexNode>
       </IndexNode>
-      <IndexNode expanded="false"/>
       <IndexNode expanded="false">
+        <IndexNode expanded="false"/>
+      </IndexNode>
+      <IndexNode expanded="true">
         <IndexNode expanded="false">
           <IndexNode expanded="true"/>
           <IndexNode expanded="true"/>
@@ -1448,7 +1490,19 @@ use (buildpath^&quot;build/export-server.sml&quot;);</text>
           <IndexNode expanded="true"/>
         </IndexNode>
       </IndexNode>
-      <IndexNode expanded="false"/>
+      <IndexNode expanded="true">
+        <IndexNode expanded="true">
+          <IndexNode expanded="false"/>
+          <IndexNode expanded="false">
+            <IndexNode expanded="true">
+              <IndexNode expanded="false"/>
+            </IndexNode>
+          </IndexNode>
+          <IndexNode expanded="true">
+            <IndexNode expanded="true"/>
+          </IndexNode>
+        </IndexNode>
+      </IndexNode>
       <IndexNode expanded="true"/>
       <IndexNode expanded="true"/>
     </IndexNode>

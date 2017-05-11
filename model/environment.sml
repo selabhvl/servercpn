@@ -29,7 +29,7 @@ fun checkenv (p,t) =
       in
 	  if (msg = STOP_SIMULATION_MSG)
 	  then (Log.writelog("Handling Stop Simulation\n");
-		Session.send STOP_SIMULATION_RESP; 
+		Session.send STOP_SIMULATION_RESP;
 		false) (* stop simulation *)
 	  else (if (msg = GET_PRESSURE_MSG)
 		then (Log.writelog("Handling getPressure\n");
