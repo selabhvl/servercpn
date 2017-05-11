@@ -19,16 +19,16 @@
           <layout>val P_LOW = 10000;</layout>
         </ml>
       </block>
-      <ml id="ID1526332984">val buildpath =  &quot;c:/work/servercpn/server/&quot;;
-        <layout>val buildpath =  &quot;c:/work/servercpn/server/&quot;;</layout>
+      <ml id="ID1526332984">val buildpath = &quot;c:/work/git/servercpn/server/&quot;;
+        <layout>val buildpath = &quot;c:/work/git/servercpn/server/&quot;;</layout>
       </ml>
       <use id="ID1526333029">
         <ml>(buildpath^&quot;session/logging.sml&quot;)</ml>
-        <layout>use (buildpath^&quot;session/logging.sml&quot;);</layout>
+        <layout>use  (buildpath^&quot;session/logging.sml&quot;);</layout>
       </use>
       <use id="ID1526337172">
         <ml>(buildpath^&quot;session/session.sml&quot;)</ml>
-        <layout>use (buildpath^&quot;session/session.sml&quot;);</layout>
+        <layout>use  (buildpath^&quot;session/session.sml&quot;);</layout>
       </use>
       <use id="ID1526341555">
         <ml>(buildpath^&quot;../model/environment.sml&quot;)</ml>
@@ -551,7 +551,7 @@ checkenv(p,t)</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1527498886">
+        <annot id="ID1527498938">
           <posattr x="-91.000000"
                    y="31.000000"/>
           <fillattr colour="White"
@@ -583,7 +583,7 @@ checkenv(p,t)</text>
                    currentcyckle="2"/>
         <transend idref="ID1455805656"/>
         <placeend idref="ID1526315760"/>
-        <annot id="ID1527498887">
+        <annot id="ID1527498939">
           <posattr x="60.000000"
                    y="-25.000000"/>
           <fillattr colour="White"
@@ -615,7 +615,7 @@ checkenv(p,t)</text>
                    currentcyckle="2"/>
         <transend idref="ID1526315936"/>
         <placeend idref="ID1526315760"/>
-        <annot id="ID1527498888">
+        <annot id="ID1527498940">
           <posattr x="60.000000"
                    y="-120.000000"/>
           <fillattr colour="White"
@@ -660,7 +660,7 @@ checkenv(p,t)</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1527498889">
+        <annot id="ID1527498941">
           <posattr x="-89.000000"
                    y="-157.000000"/>
           <fillattr colour="White"
@@ -987,7 +987,7 @@ else empty</text>
           <textattr colour="Black"
                     bold="false"/>
         </bendpoint>
-        <annot id="ID1527498890">
+        <annot id="ID1527498942">
           <posattr x="-267.000000"
                    y="-58.000000"/>
           <fillattr colour="White"
