@@ -9,7 +9,7 @@ fun RESETSIMULATION () = (); (* NOT IMPLEMENTED YET *)
 fun STOP_SIMULATION () = Session.send STOP_SIMULATION_RESP;
 
 fun GETPRESSURE() = Session.send STOP_SIMULATION_RESP;
-val GET_PRESSURE_MSG = "GETPRESSURE()\n";
+val GET_PRESSURE_MSG = "GETPRESSURE();\n";
 
 fun GETTORQUE() = Session.send STOP_SIMULATION_RESP;
 val GET_TORQUE_MSG = "GETTORQUE();\n";
@@ -23,7 +23,7 @@ fun checkenv (p,t) =
       in
 	  case msg of
 	      "STOP_SIMULATION();\n" => false
-	   |  "GETPRESSURE()\n" => (Session.send (Int.toString p);
+	   |  "GETPRESSURE();\n" => (Session.send (Int.toString p);
 				true)
 	   |  "GETTORQUE();\n" => (Session.send (Int.toString t);
 				 true)
