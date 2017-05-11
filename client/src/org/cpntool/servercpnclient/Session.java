@@ -29,22 +29,24 @@ public class Session {
 			server.connect("localhost", serverport);
 		} catch (UnknownHostException e) {
 			System.err.println("Unknown host");
+			connected = false;
 		} catch (IOException e) {
 			System.err.println("IO Exception");
-		} finally {
 			connected = false;
-		}
+		} 
 
 		// server will return version number in response to connect
+		
+		if (connected) {
 		try {
 			received = EncodeDecode.decodeString(server.receive());
 			System.out.println("Server version number: " + received);
 		} catch (SocketException e) {
 			System.err.println("Socket Exception");
 			connected = false;
-
 		}
-
+		}
+		
 		return connected;
 	}
 
