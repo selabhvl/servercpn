@@ -19,8 +19,8 @@
           <layout>val P_LOW = 10000;</layout>
         </ml>
       </block>
-      <ml id="ID1526332984">val buildpath = &quot;c:/work/servercpn/server/&quot;;
-        <layout>val buildpath = &quot;c:/work/servercpn/server/&quot;;</layout>
+      <ml id="ID1526332984">val buildpath =  &quot;c:/work/servercpn/server/&quot;;
+        <layout>val buildpath =  &quot;c:/work/servercpn/server/&quot;;</layout>
       </ml>
       <use id="ID1526333029">
         <ml>(buildpath^&quot;session/logging.sml&quot;)</ml>

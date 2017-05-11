@@ -44,7 +44,7 @@ struct
 	 end;
 
     fun canreceive () = 
-	(Log.writelog ("Session poll :\n");
+	((*Log.writelog ("Session poll :\n");*)
 	 ConnManagementLayer.canreceive (client()));
 
     fun startSession () = () 
