@@ -31,14 +31,14 @@ struct
     fun client() = connectionname
 
     fun send message = 
-        (Log.writelog ("Sending message :\n"^message^"\n");
+        (Log.writelog ("Sending message: "^message^"\n");
 	ConnManagementLayer.send (client(),message,stringEncode))
 
 
     fun receive message = 
         let
 	     val message = ConnManagementLayer.receive(client(),stringDecode)
-	     val _ = Log.writelog ("receiving message :\n"^message^"\n")
+	     val _ = Log.writelog ("Receiving message: "^message^"\n")
 	 in
 	     message
 	 end;
@@ -52,15 +52,19 @@ struct
 
     fun terminate () = (Log.writelog ("terminateSession called\n"); raise terminateExn);
 
+    val currentrequest = ref "";
+    
     fun processrequests () = 
         ((let
+             val _ = Log.writelog ("Awaiting request ...\n");
              (* --- read the next request --- *)
              val request = 
                  ConnManagementLayer.receive (client(),
                                               stringDecode)
                  
              (* --- process the request ---- *)
-             val _ = Log.writelog ("Processing request:\n"^request^"\n");
+	     val _ = (currentrequest := request);
+             val _ = Log.writelog ("Processing request: "^request^"\n");
              val _ = ConnManagementLayer.send (client(),OK,stringEncode);
              val _ = usestring ([request]);
          in
@@ -69,7 +73,8 @@ struct
 
         handle exn => 
                 ((* --- terminate the server --- *)
-               	 Log.writelog ("Exception processing request: "^(exnName exn)^" .\n");
+               	  Log.writelog ("Exception: "^(exnName exn)^
+				" Processing: "^(!currentrequest)^"\n");
                  Log.writelog ("CPN server terminating.\n"); 
                  ConnManagementLayer.closeConnection (client())))
 
