@@ -18,7 +18,7 @@ public class SimpleClient {
 				System.out.println("Pressure : " + pressure);
 				
 				int torque = server.getTorque();
-				System.out.println("Torque : " + pressure);
+				System.out.println("Torque : " + torque);
 				
 				if (pressure < 0 || torque <0) {
 					stopped = true;
@@ -31,6 +31,10 @@ public class SimpleClient {
 			if (!stopped) {
 				server.stopSimulation();
 			}
+			
+			System.out.print("Shutdown ... ");
+			server.shutdown();
+			System.out.println("done ");
 		}
 	}
 }
