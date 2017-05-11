@@ -5,7 +5,7 @@ public class Server {
 	final static String START_SIMULATION_CMD = "STARTSIMULATION();\n";
 	final static String RESET_SIMULATION_CMD = "RESETSIMULATION();\n";
 	
-	final static String GET_PRESSURE_MSG = "GETPRESSURE()\n";
+	final static String GET_PRESSURE_MSG = "GETPRESSURE();\n";
 	final static String GET_TORQUE_MSG = "GETTORQUE();\n";
 	
 	final static String STOP_SIMULATION_MSG = "STOP_SIMULATION();\n";
@@ -22,7 +22,7 @@ public class Server {
 
 	// connect to the server
 	public boolean connect() {
-    	Session session = new Session();    	
+    	this.session = new Session();    	
     	return session.start(port);
 	}
 	
