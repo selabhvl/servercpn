@@ -42,6 +42,7 @@ public class Server implements ICPNServer {
 	}
 
 	public String stopSimulation() {
+		session.evaluateWait(STOP_SIMULATION_MSG); // CPN Tools currently starts a second sim 
 		return session.evaluateWait(STOP_SIMULATION_MSG);
 	}
 
