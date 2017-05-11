@@ -20,6 +20,7 @@ fun checkenv (p,t) =
   then
       (let
 	  val msg = Session.receive()
+	  val _ = Log.writelog("Environment: "^msg);
       in
 	  case msg of
 	      "STOP_SIMULATION();\n" => false
