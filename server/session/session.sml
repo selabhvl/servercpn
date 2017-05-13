@@ -67,6 +67,7 @@ struct
              val _ = Log.writelog ("Processing request: "^request^"\n");
              val _ = ConnManagementLayer.send (client(),OK,stringEncode);
              val _ = usestring ([request]);
+	     val _ = (currentrequest := "");
          in
              processrequests () 
          end)
@@ -74,7 +75,9 @@ struct
         handle exn => 
                 ((* --- terminate the server --- *)
                	  Log.writelog ("Exception: "^(exnName exn)^
-				" Processing: "^(!currentrequest)^"\n");
+				(if (!currentrequest) <> ""
+				 then " Processing: "^(!currentrequest)
+				 else "")^"\n");
                  Log.writelog ("CPN server terminating.\n"); 
                  ConnManagementLayer.closeConnection (client())))
 
