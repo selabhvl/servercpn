@@ -1,17 +1,6 @@
 val STOP_SIMULATION_MSG = "STOP_SIMULATION();\n";
 val STOP_SIMULATION_RESP = "STOPPED_SIMULATION";
-
-fun STARTSIMULATION () = (CPN'Replications.run();
-			  Session.send STOP_SIMULATION_RESP); 
-
-fun RESETSIMULATION () = (); (* NOT IMPLEMENTED YET *)
-
-fun STOP_SIMULATION () = Session.send STOP_SIMULATION_RESP;
-
-fun GETPRESSURE() = Session.send STOP_SIMULATION_RESP;
 val GET_PRESSURE_MSG = "GETPRESSURE();\n";
-
-fun GETTORQUE() = Session.send STOP_SIMULATION_RESP;
 val GET_TORQUE_MSG = "GETTORQUE();\n";
 
 exception checkEnvExn of string;
@@ -28,8 +17,7 @@ fun checkenv (p,t) =
 		   else ());*)
       in
 	  if (msg = STOP_SIMULATION_MSG)
-	  then (Log.writelog("Handling Stop Simulation\n");
-		Session.send STOP_SIMULATION_RESP;
+	  then (Log.writelog("Handling stop simulation\n");
 		false) (* stop simulation *)
 	  else (if (msg = GET_PRESSURE_MSG)
 		then (Log.writelog("Handling getPressure\n");
@@ -45,20 +33,31 @@ fun checkenv (p,t) =
       end)
   else true (* continue simulation *)
 
+	   (* mock simulator that can be used for testing purposes *)
+fun MockSimulator (p,t) =
+  let
+      val continue = checkenv (p,t)
+      val p' = if p > 500 then 1 else p+1
+      val t' = if t > 200 then 1 else t+1
+  in
+      if continue
+      then MockSimulator (p',t')
+      else ()
+  end;
 
-(*	  case msg of
-	      "STOP_SIMULATION();\n" =>
-	      (Log.writelog("Handling getPressure");
-	       false)
-	   |  "GETPRESSURE();\n" =>
-	      (Log.writelog("Handling getPressure");
-	       Session.send (Int.toString p);
-	       true)
-	   |  "GETTORQUE();\n" =>
-	      (Log.writelog("Handling getTorque");
-	       Session.send (Int.toString t);
-	       true)
-	   |  _ =>
-	      (Log.writelog("checkEnvExn\n");
-	       raise checkEnvExn msg)
-*)
+fun STARTSIMULATION () =
+  ( Log.writelog ("Running simulation ...");
+    (* CPN'Replications.run() *) MockSimulator(1,1);
+    Log.writelog ("Done\n");
+    Session.send STOP_SIMULATION_RESP); 
+
+fun RESETSIMULATION () = (); (* NOT IMPLEMENTED YET *)
+
+fun STOP_SIMULATION () = Session.send STOP_SIMULATION_RESP;
+
+fun GETPRESSURE() = Session.send STOP_SIMULATION_RESP;
+
+
+fun GETTORQUE() = Session.send STOP_SIMULATION_RESP;
+
+
