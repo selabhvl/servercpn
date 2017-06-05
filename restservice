@@ -1,0 +1,163 @@
+package com.cpn.server;
+
+import org.cpntool.servercpnclient.*;
+import java.util.Scanner;
+
+import javax.websocket.server.PathParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Path("/server")
+public class ServerCpn {
+	
+	static Scanner sc = new Scanner(System.in);
+	public static Server conn;
+	static boolean connectionstate = false;		//true if the connection is established
+	static short serverstate = -1; 				//-1 if the server is on 
+												//(we claim the server is on at the first connection)
+	static boolean simstate = true;			//true if simulation is stopped		
+	public static Session sess;
+
+	
+	
+	//method connection: connect to the server
+	@GET
+	@Path("/connect") 
+	@Produces(MediaType.TEXT_PLAIN)
+	public static String connection(){
+		if (connectionstate !=  true){			//executed if a connection is not in process
+			if (serverstate == -1){				//executed if server is up
+			conn = new Server(5000,"localhost");
+			conn.connect();
+			
+			connectionstate = true;
+			serverstate = -1;
+			return "Connection to server done. You can start a simulation now!";
+			}else{
+				serverstate = -1;
+				return "MAKE SURE THE CPN SIMULATION SERVER IS STARTED!";
+			}
+		}
+		else{
+			return "Connected!";
+		}
+	}	
+		
+	//method startsimulation: start a simulation
+	@GET
+	@Path("/connect/startsimulation")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String startsim(){
+			if (simstate != false){
+				if (connectionstate != false){
+					ServerCpn.connection();
+					conn.startSimulation();
+					simstate = false;
+					return "Simulation started";
+				}else{
+					return "Open a connection before starting a simulation";
+				}
+			}else{
+				return "A simulation is already started";
+			}
+		
+	}
+	
+	//method stopsimulation: stop a simulation
+	@GET
+	@Path("/connect/stopsimulation")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String stopsim(){
+		if (simstate != true){
+		conn.stopSimulation();
+		simstate = true;
+		return "Simulation stopped";
+		}else{
+			return"Simulation already stopped. Start one!";
+		}
+	}
+	
+	//method resetsimulation: reset a simulation
+	@GET
+	@Path("/connect/resetsimulation")
+	@Produces(MediaType.TEXT_PLAIN)
+	public void resetsim(){
+		conn.resetSimulation();
+	}
+	
+	//method disconnect: disconnect the server
+	@GET
+	@Path("/disconnect")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String disconnection(){
+		if (connectionstate != false && simstate != false && serverstate == -1){
+			conn.disconnect();
+			serverstate = 0; //server off
+			connectionstate = false;
+			return "Disconnected";
+		}else{
+		if(serverstate == 0){
+			return "Server is not started. Start it before disconnecting";
+		}
+		if(connectionstate == false){
+			return "No connection established";
+		}
+		else{
+			return "Stop simulation before trying to disconnect";
+		}
+		}
+	}
+	
+	//method shutdown: shutdown the server
+	//this method behaves like disconnect
+	@GET
+	@Path("/shutdown" )
+	@Produces(MediaType.TEXT_PLAIN)
+	public String shutdown()throws NullPointerException{
+		if (connectionstate != false && simstate != false && serverstate == -1){
+			conn.disconnect();
+			serverstate = 0; //server off
+			connectionstate = false;
+			return "Shutdown";
+		}else{
+		if(serverstate == 0){
+			return "Server is not started. Start it before shutdown";
+		}
+		if(connectionstate == false){
+			return "No connection established";
+		}
+		else{
+			return "Stop simulation before trying to shutdown";
+		}
+		}
+	}
+	
+	//method to get pressure
+	@GET
+	@Path("/connect/startsimulation/pressure")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String pressure(){
+		if (simstate != true){
+			String press = Integer.toString(conn.getPressure());
+			return "Pressure = " + press;
+		}else{
+			return "Simulation is not started";
+		}
+	}
+	
+	//method to get torque
+	@GET
+	@Path("/connect/startsimulation/torque")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String torque(){
+		if (simstate != true){
+			String tor = Integer.toString(conn.getTorque());
+			return "Torque = " + tor;
+		}else{
+			return "Simulation is not started";
+		}
+	}
+}
