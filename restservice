@@ -16,7 +16,7 @@ public class ServerCpn {
 	static Scanner sc = new Scanner(System.in);
 	public static Server conn;
 	static boolean connectionstate = false;		//true if the connection is established
-	static short serverstate = -1; 				//-1 if the server is on 
+	static short serverstate = 0; 				//-1 if the server is on 
 												//(we claim the server is on at the first connection)
 	static boolean simstate = true;			//true if simulation is stopped		
 	public static Session sess;
@@ -29,15 +29,12 @@ public class ServerCpn {
 	@Produces(MediaType.TEXT_PLAIN)
 	public static String connection(){
 		if (connectionstate !=  true){			//executed if a connection is not in process
-			if (serverstate == -1){				//executed if server is up
 			conn = new Server(5000,"localhost");
-			conn.connect();
-			
+			if (conn.connect()){				//executed if server is up
 			connectionstate = true;
 			serverstate = -1;
 			return "Connection to server done. You can start a simulation now!";
 			}else{
-				serverstate = -1;
 				return "MAKE SURE THE CPN SIMULATION SERVER IS STARTED!";
 			}
 		}
