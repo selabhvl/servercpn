@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import javax.websocket.server.PathParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/server")
@@ -16,7 +16,7 @@ public class ServerCpn {
 	static Scanner sc = new Scanner(System.in);
 	public static Server conn;
 	static boolean connectionstate = false;		//true if the connection is established
-	static short serverstate = 0; 				//-1 if the server is on 
+	static byte serverstate = 0; 				//-1 if the server is on 
 												//(we claim the server is on at the first connection)
 	static boolean simstate = true;			//true if simulation is stopped		
 	public static Session sess;
@@ -25,17 +25,17 @@ public class ServerCpn {
 	
 	//method connection: connect to the server
 	@GET
-	@Path("/connect") 
+	@Path("connect")
 	@Produces(MediaType.TEXT_PLAIN)
-	public static String connection(){
+	public String connection(@QueryParam("port") int port){
 		if (connectionstate !=  true){			//executed if a connection is not in process
-			conn = new Server(5000,"localhost");
+			conn = new Server(port,"localhost");
 			if (conn.connect()){				//executed if server is up
 			connectionstate = true;
 			serverstate = -1;
 			return "Connection to server done. You can start a simulation now!";
 			}else{
-				return "MAKE SURE THE CPN SIMULATION SERVER IS STARTED!";
+				return "MAKE SURE YOU ARE USING THE RIGHT PORT NUMBER THE CPN SIMULATION SERVER IS STARTED!";
 			}
 		}
 		else{
@@ -50,7 +50,6 @@ public class ServerCpn {
 	public String startsim(){
 			if (simstate != false){
 				if (connectionstate != false){
-					ServerCpn.connection();
 					conn.startSimulation();
 					simstate = false;
 					return "Simulation started";
