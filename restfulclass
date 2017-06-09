@@ -1,4 +1,4 @@
-package com.cpn.server;
+package cpn.rest.servlet;
 
 import org.cpntool.servercpnclient.*;
 import java.util.Scanner;
